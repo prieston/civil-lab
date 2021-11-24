@@ -4,11 +4,22 @@ import initParams from "./initParams";
 export const clip = new HTMLClip({
   html: `
     <div class="container">
-        <img src="./assets/rest.png">
-        <img src="./assets/civil.png">
+        <img width="300" id="civil" src="https://raw.githubusercontent.com/prieston/civil-lab/main/clip/assets/civil.png">
+        <img src="https://prieston.github.io/civil-lab/clip/assets/rest.png">
     </div>`,
   css: `
+  img{
+    object-fit:contain;
+    height:100%;
+  }
+  #civil{
+    position:absolute;
+    left:320px;
+    top:-65px;
+    transform-origin:50px 100px;
+  }
   .container {
+    object-fit:contain;
     width:100%;
     height:100%;
     display:flex;
@@ -38,14 +49,44 @@ const MyIncident = new CSSEffect(
   {
     animatedAttrs: {
       transform: {
-        scale: 2,
+        rotateZ: "30deg",
       },
     },
   },
   {
-    selector: ".container",
-    duration: 2000,
-    easing: "linear",
+    selector: "#civil",
+    duration: 1000,
+    easing: "easeOutQuart",
+  }
+);
+const MyIncident1 = new CSSEffect(
+  {
+    animatedAttrs: {
+      transform: {
+        rotateZ: "-30deg",
+      },
+    },
+  },
+  {
+    selector: "#civil",
+    duration: 1000,
+    easing: "easeOutQuart",
+  }
+);
+const MyIncident2 = new CSSEffect(
+  {
+    animatedAttrs: {
+      transform: {
+        rotateZ: "0deg",
+      },
+    },
+  },
+  {
+    selector: "#civil",
+    duration: 500,
+    easing: "easeOutQuart",
   }
 );
 clip.addIncident(MyIncident, 0);
+clip.addIncident(MyIncident1, 1000);
+clip.addIncident(MyIncident2, 2000);
